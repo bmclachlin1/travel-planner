@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'models/city.dart';
+import 'widgets/description_widget.dart';
+import 'widgets/weather_widget.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -65,30 +67,8 @@ class _TravelPlannerState extends State<TravelPlanner> {
                             });
                       },
                     ),
-                    Container(
-                        width: 450,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text("Description",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall),
-                            SizedBox(height: 16),
-                            Text(_city?.description ?? 'empty'),
-                          ],
-                        )),
-                    Container(
-                      width: 450,
-                      height: 300,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                      padding: EdgeInsets.all(16),
-                    )
+                    DescriptionWidget(city: _city),
+                    WeatherWidget(city: _city),
                   ]),
             )));
   }
