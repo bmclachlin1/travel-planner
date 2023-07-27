@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
-import '../models/city.dart';
+import '../providers/selected_city_provider.dart';
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
     super.key,
-    required City? city,
-  }) : _city = city;
-
-  final City? _city;
+  });
 
   @override
   Widget build(BuildContext context) {
+    final cityProvider = context.watch<SelectedCityProvider>();
+
     return Container(
         width: Sizes.containerWidth,
         height: Sizes.containerHeight,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Sizes.small),
-          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(Sizes.medium),
+          border: Border.all(color: Colors.black, width: Sizes.borderWidth),
         ),
         padding: const EdgeInsets.all(Sizes.medium),
         child: Column(
@@ -27,7 +27,9 @@ class DescriptionWidget extends StatelessWidget {
             Text("Description",
                 style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: Sizes.medium),
-            Text(_city?.description ?? 'Please select a location',
+            Text(
+                cityProvider.selectedCity?.description ??
+                    'Please select a location',
                 style: Theme.of(context).textTheme.bodyLarge),
           ],
         ));

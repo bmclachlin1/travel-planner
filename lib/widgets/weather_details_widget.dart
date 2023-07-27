@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:silvacom_flutter/providers/selected_city_provider.dart';
 
 import '../models/weather.dart';
 
@@ -8,9 +10,11 @@ class WeatherDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final city = context.read<SelectedCityProvider>().selectedCity;
     return Column(
       children: [
-        Text("${weather.temp} degrees with ${weather.desc}",
+        Text(
+            "Today in ${city?.name}, the temperature is ${weather.temp} °C with ${weather.desc}.",
             style: Theme.of(context).textTheme.bodyLarge),
       ],
     );
