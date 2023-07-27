@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class WeatherService {
   static getCurrentWeatherData(City city) async {
     final uri = Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?lat=${city.latlong[0]}&lon=${city.latlong[1]}&appid=${Api.openWeatherMapApiKey}&units=metric");
+        "https://api.openweathermap.org/data/2.5/weather?lat=${city.latlong[0]}&lon=${city.latlong[1]}&appid=${Apis.openWeatherMapApiKey}&units=metric");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

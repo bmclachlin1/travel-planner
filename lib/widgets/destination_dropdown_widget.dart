@@ -12,7 +12,7 @@ class DestinationDropdownWidget extends StatelessWidget {
   });
 
   final Stream<QuerySnapshot> _citiesStream =
-      FirebaseFirestore.instance.collection('cities').snapshots();
+      FirebaseFirestore.instance.collection(Texts.citiesCollection).snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class DestinationDropdownWidget extends StatelessWidget {
             width: Sizes.containerWidth,
             child: InputDecorator(
               decoration: InputDecoration(
-                  hintText: "Please select a destination",
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: Sizes.small, vertical: Sizes.xs),
                   border: OutlineInputBorder(
@@ -34,6 +33,7 @@ class DestinationDropdownWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Sizes.medium))),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<City>(
+                    hint: const Text(Texts.dropdownHintText),
                     value: cityProvider.selectedCity,
                     items: snapshot.data!.docs.map((doc) {
                       final Map<String, dynamic> data =
@@ -52,7 +52,7 @@ class DestinationDropdownWidget extends StatelessWidget {
             ),
           );
         } else if (snapshot.hasError) {
-          return const Text('Something went wrong.');
+          return const Text(Texts.genericError);
         }
 
         return const Center(child: CircularProgressIndicator());

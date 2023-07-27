@@ -24,12 +24,19 @@ class DescriptionWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Description",
-                style: Theme.of(context).textTheme.headlineSmall),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(Texts.descriptionHeader,
+                    style: Theme.of(context).textTheme.headlineSmall),
+                const Icon(Icons.description,
+                    size: Sizes.xl, color: Colors.indigo)
+              ],
+            ),
             const SizedBox(height: Sizes.medium),
             Text(
                 cityProvider.selectedCity?.description ??
-                    'Please select a location',
+                    Texts.descriptionHintText,
                 style: Theme.of(context).textTheme.bodyLarge),
           ],
         ));

@@ -1,3 +1,4 @@
+/// Domain model for weather data returned from the openweathermap API
 class Weather {
   final double temp;
   final double humidity;
@@ -10,6 +11,7 @@ class Weather {
       required this.humidity,
       required this.wind});
 
+  /// Factory method used to convert the HTTP response body from openweathermap API to our weather domain model
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
         temp: json['main']['temp'],
