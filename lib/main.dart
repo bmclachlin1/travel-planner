@@ -40,30 +40,26 @@ class TravelPlanner extends StatelessWidget {
               centerTitle: true,
             ),
             body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Select your destination!",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(color: Colors.green)),
-                        const SizedBox(width: Sizes.large),
-                        const Icon(Icons.travel_explore,
-                            color: Colors.blueAccent, size: Sizes.xl),
-                      ],
-                    ),
-                    const SizedBox(height: Sizes.medium),
-                    DestinationDropdownWidget(),
-                    const SizedBox(height: Sizes.medium),
-                    const DescriptionWidget(),
-                    const SizedBox(height: Sizes.medium),
-                    const WeatherWidget(),
-                  ]),
+              child: SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Select your destination!",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(color: Colors.green)),
+                      const SizedBox(width: Sizes.large),
+                      const SizedBox(height: Sizes.medium),
+                      DestinationDropdownWidget(),
+                      const SizedBox(height: Sizes.medium),
+                      const DescriptionWidget(),
+                      const SizedBox(height: Sizes.medium),
+                      const WeatherWidget(),
+                      const SizedBox(height: Sizes.medium),
+                    ]),
+              ),
             )));
   }
 }

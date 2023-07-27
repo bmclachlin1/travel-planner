@@ -30,9 +30,10 @@ class WeatherWidget extends StatelessWidget {
             Text("Weather", style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: Sizes.medium),
             cityProvider.selectedCity == null
-                ? const Text('Please select a location')
+                ? Text('Please select a location',
+                    style: Theme.of(context).textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
-                    future: WeatherService.getWeatherData(
+                    future: WeatherService.getCurrentWeatherData(
                         cityProvider.selectedCity!),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
