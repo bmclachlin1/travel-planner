@@ -45,12 +45,12 @@ class TravelPlanner extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      const SizedBox(height: Sizes.medium),
                       Text("Select your destination!",
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
                               ?.copyWith(color: Colors.green)),
-                      const SizedBox(width: Sizes.large),
                       const SizedBox(height: Sizes.medium),
                       DestinationDropdownWidget(),
                       const SizedBox(height: Sizes.medium),
