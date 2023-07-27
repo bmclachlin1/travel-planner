@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../providers/selected_city_provider.dart';
 
+/// Describes the city you are visiting
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
     super.key,

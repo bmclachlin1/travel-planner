@@ -4,6 +4,7 @@ import 'package:silvacom_flutter/providers/selected_city_provider.dart';
 
 import '../models/weather.dart';
 
+/// Encapsulates building the text for selected city
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget({super.key, required this.weather});
   final Weather weather;
@@ -11,6 +12,7 @@ class WeatherDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final city = context.read<SelectedCityProvider>().selectedCity;
+
     return Column(
       children: [
         Text(
