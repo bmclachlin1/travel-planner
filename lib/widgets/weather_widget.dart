@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../models/city.dart';
+import '../services/weather_service.dart';
 
 class WeatherWidget extends StatelessWidget {
   const WeatherWidget({
     super.key,
     required City? city,
-  });
+  }) : _city = city;
+
+  final City? _city;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,18 @@ class WeatherWidget extends StatelessWidget {
           children: <Widget>[
             Text("Weather", style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 16),
+            _city == null
+                ? const Text('Please select a location')
+                : FutureBuilder<dynamic>(
+                    future: WeatherService.getWeatherData(_city!),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data!);
+                      } else if (snapshot.hasError) {
+                        return const Text("Something went wrong.");
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    })
           ],
         ));
   }

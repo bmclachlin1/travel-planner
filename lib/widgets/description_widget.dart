@@ -25,7 +25,7 @@ class DescriptionWidget extends StatelessWidget {
             Text("Description",
                 style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 16),
-            Text(_city?.description ?? 'empty'),
+            Text(_city?.description ?? 'Please select a location'),
           ],
         ));
   }
