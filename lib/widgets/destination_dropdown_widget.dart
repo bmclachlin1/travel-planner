@@ -8,6 +8,7 @@ import '../providers/selected_city_provider.dart';
 
 class DestinationDropdownWidget extends StatelessWidget {
   DestinationDropdownWidget({super.key, required this.city});
+
   final City? city;
 
   final Stream<QuerySnapshot> _citiesStream =
