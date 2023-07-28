@@ -30,7 +30,6 @@ class TravelPlanner extends StatelessWidget {
     final theme = Theme.of(context);
 
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: Texts.htmlWindowTitle,
         theme: ThemeData(
             appBarTheme: const AppBarTheme(

@@ -35,7 +35,7 @@ class DescriptionWidget extends StatelessWidget {
             ),
             const SizedBox(height: Sizes.medium),
             Text(city?.description ?? Texts.descriptionHintText,
-                style: theme.textTheme.bodyLarge),
+                style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
           ],
         ));
   }
