@@ -4,7 +4,7 @@ import '../constants.dart';
 import '../models/city.dart';
 import 'package:http/http.dart' as http;
 
-class WeatherService {
+class OpenWeatherMapService {
   static getCurrentWeatherData(City city) async {
     final uri = Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?lat=${city.latlong[0]}&lon=${city.latlong[1]}&appid=${Apis.openWeatherMapApiKey}&units=metric");

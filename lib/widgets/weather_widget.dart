@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../models/city.dart';
 import '../models/weather.dart';
-import '../services/weather_service.dart';
+import '../services/open_weather_map_service.dart';
 import 'weather_details_widget.dart';
 
 /// Displays the weather for the city you are visiting
@@ -38,7 +38,7 @@ class WeatherWidget extends StatelessWidget {
             city == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
-                    future: WeatherService.getCurrentWeatherData(city!),
+                    future: OpenWeatherMapService.getCurrentWeatherData(city!),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
