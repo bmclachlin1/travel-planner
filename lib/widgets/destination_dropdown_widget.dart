@@ -7,17 +7,14 @@ import '../models/city.dart';
 import '../providers/selected_city_provider.dart';
 
 class DestinationDropdownWidget extends StatelessWidget {
-  DestinationDropdownWidget({
-    super.key,
-  });
+  DestinationDropdownWidget({super.key, required this.city});
+  final City? city;
 
   final Stream<QuerySnapshot> _citiesStream =
       FirebaseFirestore.instance.collection(Texts.citiesCollection).snapshots();
 
   @override
   Widget build(BuildContext context) {
-    final cityProvider = context.watch<SelectedCityProvider>();
-
     return StreamBuilder(
       stream: _citiesStream,
       builder: (context, snapshot) {
@@ -34,7 +31,7 @@ class DestinationDropdownWidget extends StatelessWidget {
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<City>(
                     hint: const Text(Texts.dropdownHintText),
-                    value: cityProvider.selectedCity,
+                    value: city,
                     items: snapshot.data!.docs.map((doc) {
                       final Map<String, dynamic> data =
                           doc.data()! as Map<String, dynamic>;
@@ -46,7 +43,9 @@ class DestinationDropdownWidget extends StatelessWidget {
                           child: Text("${city.name} (${city.label})"));
                     }).toList(),
                     onChanged: (city) {
-                      cityProvider.updateSelectedCity(city);
+                      context
+                          .read<SelectedCityProvider>()
+                          .updateSelectedCity(city);
                     }),
               ),
             ),

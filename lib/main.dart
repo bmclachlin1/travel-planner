@@ -26,6 +26,9 @@ class TravelPlanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cityProvider = context.watch<SelectedCityProvider>();
+    final theme = Theme.of(context);
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: Texts.htmlWindowTitle,
@@ -34,8 +37,7 @@ class TravelPlanner extends StatelessWidget {
                 foregroundColor: Colors.white, backgroundColor: Colors.indigo),
             useMaterial3: true,
             primarySwatch: Colors.indigo,
-            textTheme:
-                GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
+            textTheme: GoogleFonts.montserratTextTheme(theme.textTheme)),
         home: Scaffold(
             appBar: AppBar(
               title: const Text(Texts.appBarTitle),
@@ -49,7 +51,7 @@ class TravelPlanner extends StatelessWidget {
               child: Center(
                 child: SingleChildScrollView(
                   child: Card(
-                    elevation: 64,
+                    elevation: Sizes.xl,
                     shadowColor: Colors.white.withOpacity(0.3),
                     child: Padding(
                       padding: const EdgeInsets.all(Sizes.medium),
@@ -59,14 +61,14 @@ class TravelPlanner extends StatelessWidget {
                           children: <Widget>[
                             const SizedBox(height: Sizes.medium),
                             Text(Texts.cardHeader,
-                                style:
-                                    Theme.of(context).textTheme.headlineMedium),
+                                style: theme.textTheme.headlineMedium),
                             const SizedBox(height: Sizes.medium),
-                            DestinationDropdownWidget(),
+                            DestinationDropdownWidget(
+                                city: cityProvider.selectedCity),
                             const SizedBox(height: Sizes.medium),
-                            const DescriptionWidget(),
+                            DescriptionWidget(city: cityProvider.selectedCity),
                             const SizedBox(height: Sizes.medium),
-                            const WeatherWidget(),
+                            WeatherWidget(city: cityProvider.selectedCity),
                             const SizedBox(height: Sizes.medium),
                           ]),
                     ),

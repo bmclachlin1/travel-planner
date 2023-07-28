@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:silvacom_flutter/providers/selected_city_provider.dart';
 
 import '../constants.dart';
+import '../models/city.dart';
 import '../models/weather.dart';
 import '../services/weather_service.dart';
 import 'weather_details_widget.dart';
 
 /// Displays the weather for the city you are visiting
 class WeatherWidget extends StatelessWidget {
-  const WeatherWidget({
-    super.key,
-  });
+  const WeatherWidget({super.key, required this.city});
+
+  final City? city;
 
   @override
   Widget build(BuildContext context) {
-    final cityProvider = context.watch<SelectedCityProvider>();
+    final theme = Theme.of(context);
 
     return Container(
         width: Sizes.containerWidth,
@@ -31,24 +30,24 @@ class WeatherWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(Texts.weatherHeader,
-                    style: Theme.of(context).textTheme.headlineSmall),
+                Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
                 const Icon(Icons.cloud, color: Colors.blue, size: Sizes.xl)
               ],
             ),
             const SizedBox(height: Sizes.medium),
-            cityProvider.selectedCity == null
-                ? Text(Texts.weatherHintText,
-                    style: Theme.of(context).textTheme.bodyLarge)
+            city == null
+                ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
-                    future: WeatherService.getCurrentWeatherData(
-                        cityProvider.selectedCity!),
+                    future: WeatherService.getCurrentWeatherData(city!),
                     builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return WeatherDetailsWidget(
-                            weather: Weather.fromJson(snapshot.data!));
-                      } else if (snapshot.hasError) {
-                        return const Text(Texts.genericError);
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          return WeatherDetailsWidget(
+                              weather: Weather.fromJson(snapshot.data!),
+                              city: city!);
+                        } else if (snapshot.hasError) {
+                          return const Text(Texts.genericError);
+                        }
                       }
                       return const Center(child: CircularProgressIndicator());
                     })
