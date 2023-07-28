@@ -48,28 +48,31 @@ class TravelPlanner extends StatelessWidget {
                       fit: BoxFit.fill,
                       image: NetworkImage(Apis.backgroundImageUri))),
               child: Center(
-                child: SingleChildScrollView(
-                  child: Card(
-                    elevation: Sizes.xl,
-                    shadowColor: Colors.white.withOpacity(0.3),
-                    child: Padding(
-                      padding: const EdgeInsets.all(Sizes.medium),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            const SizedBox(height: Sizes.medium),
-                            Text(Texts.cardHeader,
-                                style: theme.textTheme.headlineMedium),
-                            const SizedBox(height: Sizes.medium),
-                            DestinationDropdownWidget(
-                                city: cityProvider.selectedCity),
-                            const SizedBox(height: Sizes.medium),
-                            DescriptionWidget(city: cityProvider.selectedCity),
-                            const SizedBox(height: Sizes.medium),
-                            WeatherWidget(city: cityProvider.selectedCity),
-                            const SizedBox(height: Sizes.medium),
-                          ]),
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    child: Card(
+                      elevation: Sizes.xl,
+                      shadowColor: Colors.white.withOpacity(0.3),
+                      child: Padding(
+                        padding: const EdgeInsets.all(Sizes.medium),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              const SizedBox(height: Sizes.medium),
+                              Text(Texts.cardHeader,
+                                  style: theme.textTheme.headlineMedium),
+                              const SizedBox(height: Sizes.medium),
+                              DestinationDropdownWidget(
+                                  city: cityProvider.selectedCity),
+                              const SizedBox(height: Sizes.medium),
+                              DescriptionWidget(
+                                  city: cityProvider.selectedCity),
+                              const SizedBox(height: Sizes.medium),
+                              WeatherWidget(city: cityProvider.selectedCity),
+                              const SizedBox(height: Sizes.medium),
+                            ]),
+                      ),
                     ),
                   ),
                 ),
