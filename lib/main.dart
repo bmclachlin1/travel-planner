@@ -51,6 +51,7 @@ class TravelPlanner extends StatelessWidget {
                 child: Scrollbar(
                   child: SingleChildScrollView(
                     child: Card(
+                      color: Colors.white.withOpacity(0.8),
                       elevation: Sizes.xl,
                       shadowColor: Colors.white.withOpacity(0.3),
                       child: Padding(
