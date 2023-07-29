@@ -18,7 +18,7 @@ class WeatherDetailsWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-            "Today in ${city.name}, the temperature is ${weather.temp} °C with ${weather.desc}. You can expect wind of ${weather.wind} km/h, and a humidity of ${weather.humidity} AH.",
+            "Today in ${city.name}, the temperature is ${weather.temp} °C with ${weather.desc}. You can expect wind of ${weather.wind} km/h, and a humidity of ${weather.humidity}%.",
             style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
       ],
     );

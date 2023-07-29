@@ -13,7 +13,6 @@ class Sizes {
   static const double xl = 32.0;
 
   static const double containerWidth = 350;
-  static const double containerHeight = 300;
 
   static const double borderWidth = 2.0;
 }
