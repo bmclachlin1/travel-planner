@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 import '../models/city.dart';
@@ -37,13 +40,13 @@ class WeatherWidget extends StatelessWidget {
             city == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
-                    future: OpenWeatherMapService.getCurrentWeatherData(city!),
+                    future: OpenWeatherMapService.getCurrentWeatherData(
+                        city!, http.Client()),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
                           return WeatherDetailsWidget(
-                              weather: Weather.fromJson(snapshot.data!),
-                              city: city!);
+                              weather: snapshot.data!, city: city!);
                         } else if (snapshot.hasError) {
                           return const Text(Texts.genericError);
                         }
