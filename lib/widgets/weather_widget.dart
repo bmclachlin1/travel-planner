@@ -1,23 +1,20 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
-import '../models/city.dart';
-import '../models/weather.dart';
+import '../providers/selected_city_provider.dart';
 import '../services/open_weather_map_service.dart';
 import 'weather_details_widget.dart';
 
 /// Displays the weather for the city you are visiting
 class WeatherWidget extends StatelessWidget {
-  const WeatherWidget({super.key, required this.city});
-
-  final City? city;
+  const WeatherWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final providedCity = context.watch<SelectedCityProvider>();
 
     return Container(
         width: Sizes.containerWidth,
@@ -37,16 +34,17 @@ class WeatherWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.medium),
-            city == null
+            providedCity.selectedCity == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
                     future: OpenWeatherMapService.getCurrentWeatherData(
-                        city!, http.Client()),
+                        providedCity.selectedCity!, http.Client()),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
                           return WeatherDetailsWidget(
-                              weather: snapshot.data!, city: city!);
+                              weather: snapshot.data!,
+                              city: providedCity.selectedCity!);
                         } else if (snapshot.hasError) {
                           return const Text(Texts.genericError);
                         }

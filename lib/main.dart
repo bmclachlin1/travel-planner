@@ -5,9 +5,7 @@ import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'firebase_options.dart';
 import 'providers/selected_city_provider.dart';
-import 'widgets/description_widget.dart';
-import 'widgets/destination_dropdown_widget.dart';
-import 'widgets/weather_widget.dart';
+import 'widgets/travel_planner_card_widget.dart';
 
 /// The starting point of our application
 void main() async {
@@ -26,7 +24,6 @@ class TravelPlanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cityProvider = context.watch<SelectedCityProvider>();
     final theme = Theme.of(context);
 
     return MaterialApp(
@@ -46,35 +43,11 @@ class TravelPlanner extends StatelessWidget {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(Apis.backgroundImageUri))),
+                      image: NetworkImage(NetworkImages.backgroundImageUri))),
               child: Center(
                 child: Scrollbar(
                   child: SingleChildScrollView(
-                    child: Card(
-                      color: Colors.white.withOpacity(0.8),
-                      elevation: Sizes.xl,
-                      shadowColor: Colors.white.withOpacity(0.3),
-                      child: Padding(
-                        padding: const EdgeInsets.all(Sizes.medium),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              const SizedBox(height: Sizes.medium),
-                              Text(Texts.cardHeader,
-                                  style: theme.textTheme.headlineMedium),
-                              const SizedBox(height: Sizes.medium),
-                              DestinationDropdownWidget(
-                                  city: cityProvider.selectedCity),
-                              const SizedBox(height: Sizes.medium),
-                              DescriptionWidget(
-                                  city: cityProvider.selectedCity),
-                              const SizedBox(height: Sizes.medium),
-                              WeatherWidget(city: cityProvider.selectedCity),
-                              const SizedBox(height: Sizes.medium),
-                            ]),
-                      ),
-                    ),
+                    child: TravelPlannerCardWidget(theme: theme),
                   ),
                 ),
               ),

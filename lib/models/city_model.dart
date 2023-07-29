@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 /// A domain model for a city
-class City extends Equatable {
+class CityModel extends Equatable {
   /// The document id as stored in firebase cloud firestore
   final String documentId;
 
@@ -17,7 +17,7 @@ class City extends Equatable {
   /// The latitude and longitude of the city, stored as [lat, long]
   final List<dynamic> latlong;
 
-  const City(
+  const CityModel(
       {required this.documentId,
       required this.name,
       required this.label,
@@ -25,8 +25,8 @@ class City extends Equatable {
       required this.latlong});
 
   /// Factory method used to construct a City from JSON, given its internal constructor
-  factory City.fromJson(Map<String, dynamic> json) {
-    return City(
+  factory CityModel.fromJson(Map<String, dynamic> json) {
+    return CityModel(
         documentId: json['id'],
         name: json['name'],
         label: json['label'],

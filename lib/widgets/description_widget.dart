@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
-import '../models/city.dart';
+import '../providers/selected_city_provider.dart';
 
 /// Describes the city you are visiting
 class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({super.key, required this.city});
-
-  final City? city;
+  const DescriptionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final providedCity = context.watch<SelectedCityProvider>();
 
     return Container(
         width: Sizes.containerWidth,
@@ -33,7 +33,9 @@ class DescriptionWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.medium),
-            Text(city?.description ?? Texts.descriptionHintText,
+            Text(
+                providedCity.selectedCity?.description ??
+                    Texts.descriptionHintText,
                 style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
           ],
         ));

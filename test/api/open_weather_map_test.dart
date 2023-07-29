@@ -2,20 +2,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:silvacom_flutter/constants.dart';
-import 'package:silvacom_flutter/models/city.dart';
-import 'package:silvacom_flutter/models/weather.dart';
+import 'package:silvacom_flutter/models/city_model.dart';
+import 'package:silvacom_flutter/models/weather_model.dart';
+import 'package:silvacom_flutter/secrets.dart';
 import 'package:silvacom_flutter/services/open_weather_map_service.dart';
 import 'open_weather_map_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() async {
   group('getCurrentWeatherData', () {
-    late City city;
+    late CityModel city;
     late MockClient client;
 
     setUp(() {
-      city = const City(
+      city = const CityModel(
           documentId: "abc",
           name: "Calgary",
           label: "YYC",
@@ -26,7 +26,7 @@ void main() async {
     test('returns weather data when http call completes successfully',
         () async {
       when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Apis.openWeatherMapApiKey}&units=metric')))
+              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
           .thenAnswer((_) async => http.Response("""{
     "coord": {
         "lon": 123.1207,
@@ -73,12 +73,12 @@ void main() async {
 }""", 200));
 
       expect(await OpenWeatherMapService.getCurrentWeatherData(city, client),
-          isA<Weather>());
+          isA<WeatherModel>());
     });
 
-    test('throws error when http response code is not 200', () async {
+    test('throws error on bad request', () async {
       when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Apis.openWeatherMapApiKey}&units=metric')))
+              'https://api.openweathermap.org/data/2.5/weather?lattttttt=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
           .thenAnswer((_) async => http.Response(
               '{"cod": "400","message": "Nothing to geocode"}', 400));
 

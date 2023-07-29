@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../models/city.dart';
-import '../models/weather.dart';
+import '../models/city_model.dart';
+import '../models/weather_model.dart';
 
 /// Encapsulates building the text for selected city
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget(
       {super.key, required this.weather, required this.city});
 
-  final Weather weather;
-  final City city;
+  final WeatherModel weather;
+  final CityModel city;
 
   @override
   Widget build(BuildContext context) {
