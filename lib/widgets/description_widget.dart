@@ -15,7 +15,6 @@ class DescriptionWidget extends StatelessWidget {
 
     return Container(
         width: Sizes.containerWidth,
-        height: Sizes.containerHeight,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Sizes.medium),
           border: Border.all(color: Colors.black, width: Sizes.borderWidth),
