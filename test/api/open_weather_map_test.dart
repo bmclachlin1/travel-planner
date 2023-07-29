@@ -78,7 +78,7 @@ void main() async {
 
     test('throws error on bad request', () async {
       when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?lattttttt=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
+              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
           .thenAnswer((_) async => http.Response(
               '{"cod": "400","message": "Nothing to geocode"}', 400));
 
