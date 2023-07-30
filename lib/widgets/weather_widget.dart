@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:silvacom_flutter/providers/number_of_weather_days_provider.dart';
 
 import '../constants.dart';
 import '../providers/selected_city_provider.dart';
@@ -8,13 +9,20 @@ import '../services/open_weather_map_service.dart';
 import 'weather_details_widget.dart';
 
 /// Displays the weather for the city you are visiting
-class WeatherWidget extends StatelessWidget {
+class WeatherWidget extends StatefulWidget {
   const WeatherWidget({super.key});
 
   @override
+  State<WeatherWidget> createState() => _WeatherWidgetState();
+}
+
+class _WeatherWidgetState extends State<WeatherWidget> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final providedCity = context.watch<SelectedCityProvider>();
+    final cityProvider = context.watch<SelectedCityProvider>();
+    final numberOfWeatherDaysProvider =
+        context.watch<NumberOfWeatherDaysProvider>();
 
     return Container(
         width: Sizes.containerWidth,
@@ -34,17 +42,19 @@ class WeatherWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Sizes.medium),
-            providedCity.selectedCity == null
+            cityProvider.selectedCity == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
                 : FutureBuilder<dynamic>(
-                    future: OpenWeatherMapService.getCurrentWeatherData(
-                        providedCity.selectedCity!, http.Client()),
+                    future: OpenWeatherMapService.getNextKDaysWeatherData(
+                        cityProvider.selectedCity!,
+                        http.Client(),
+                        numberOfWeatherDaysProvider.numberOfDays),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
                           return WeatherDetailsWidget(
-                              weather: snapshot.data!,
-                              city: providedCity.selectedCity!);
+                              weathers: snapshot.data!,
+                              city: cityProvider.selectedCity!);
                         } else if (snapshot.hasError) {
                           return const Text(Texts.genericError);
                         }

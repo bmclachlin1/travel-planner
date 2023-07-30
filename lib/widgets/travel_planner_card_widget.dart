@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:silvacom_flutter/widgets/number_of_weather_days_dropdown_widget.dart';
 
 import '../constants.dart';
 import 'description_widget.dart';
@@ -9,13 +10,12 @@ import 'weather_widget.dart';
 class TravelPlannerCardWidget extends StatelessWidget {
   const TravelPlannerCardWidget({
     super.key,
-    required this.theme,
   });
-
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Card(
       color: Colors.white.withOpacity(0.825),
       elevation: Sizes.xl,
@@ -30,6 +30,8 @@ class TravelPlannerCardWidget extends StatelessWidget {
               Text(Texts.cardHeader, style: theme.textTheme.headlineMedium),
               const SizedBox(height: Sizes.medium),
               DestinationDropdownWidget(),
+              const SizedBox(height: Sizes.medium),
+              const NumberOfWeatherDaysDropdownWidget(),
               const SizedBox(height: Sizes.medium),
               const DescriptionWidget(),
               const SizedBox(height: Sizes.medium),

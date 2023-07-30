@@ -26,10 +26,16 @@ class Texts {
   static const appBarTitle = 'T R A V E L   P L A N N E R';
   static const cardHeader = 'Choose your destination!';
   static const dropdownHintText = 'Select a city';
+  static const numberOfDaysHintText = 'Select how many days for forecast';
   static const citiesCollection = 'cities';
   static const descriptionHeader = 'Description';
   static const descriptionHintText =
       'Please select a city to get a description';
-  static const weatherHeader = 'Current Weather';
+  static const weatherHeader = 'Weather Forecast';
   static const weatherHintText = 'Please select a city to get the weather';
+}
+
+class Forecast {
+  static const days = [1, 2, 3, 4, 5];
+  static const forecastApiRate = 3;
 }

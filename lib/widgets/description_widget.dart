@@ -11,7 +11,7 @@ class DescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final providedCity = context.watch<SelectedCityProvider>();
+    final cityProvider = context.watch<SelectedCityProvider>();
 
     return Container(
         width: Sizes.containerWidth,
@@ -34,7 +34,7 @@ class DescriptionWidget extends StatelessWidget {
             ),
             const SizedBox(height: Sizes.medium),
             Text(
-                providedCity.selectedCity?.description ??
+                cityProvider.selectedCity?.description ??
                     Texts.descriptionHintText,
                 style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
           ],

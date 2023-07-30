@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:silvacom_flutter/providers/number_of_weather_days_provider.dart';
 
 import 'constants.dart';
 import 'firebase_options.dart';
@@ -14,9 +15,18 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(ChangeNotifierProvider(
+  /// Multiprovider allows us to pass multiple observables to our application
+  ///
+  /// Here we are providing the city and number of days for weather forecast to the root
+  /// of our application
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
       create: (context) => SelectedCityProvider(),
-      child: const TravelPlanner()));
+    ),
+    ChangeNotifierProvider(
+      create: (context) => NumberOfWeatherDaysProvider(),
+    )
+  ], child: const TravelPlanner()));
 }
 
 /// Stateless Widget containing the entire SPA (single page application)
@@ -45,10 +55,10 @@ class TravelPlanner extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: NetworkImage(NetworkImages.backgroundImageUri))),
-              child: Center(
+              child: const Center(
                 child: Scrollbar(
                   child: SingleChildScrollView(
-                    child: TravelPlannerCardWidget(theme: theme),
+                    child: TravelPlannerCardWidget(),
                   ),
                 ),
               ),
