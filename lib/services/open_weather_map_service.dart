@@ -22,7 +22,8 @@ class OpenWeatherMapService {
       var weatherModels = <WeatherModel>[];
       final data = jsonDecode(response.body);
       for (var day = 0; day < days; day++) {
-        weatherModels.add(WeatherModel.fromJson(data['list'][day * 8]));
+        weatherModels.add(WeatherModel.fromJson(data['list']
+            [day * TimeOfDay.hoursPerDay / Forecast.forecastApiRate]));
       }
       return weatherModels;
     } else {

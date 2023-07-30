@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:silvacom_flutter/providers/number_of_weather_days_provider.dart';
 
 import 'constants.dart';
 import 'firebase_options.dart';
+import 'providers/number_of_weather_days_provider.dart';
 import 'providers/selected_city_provider.dart';
 import 'widgets/travel_planner_card_widget.dart';
 

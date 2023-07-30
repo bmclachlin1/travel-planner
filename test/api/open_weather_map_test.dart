@@ -10,7 +10,7 @@ import 'open_weather_map_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() async {
-  group('getCurrentWeatherData', () {
+  group('getNextKDaysWeatherData', () {
     late CityModel city;
     late MockClient client;
 
@@ -26,63 +26,63 @@ void main() async {
     test('returns weather data when http call completes successfully',
         () async {
       when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
-          .thenAnswer((_) async => http.Response("""{
-    "coord": {
-        "lon": 123.1207,
-        "lat": 49.2827
-    },
-    "weather": [
+              'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
+          .thenAnswer((_) async => http.Response("""
+  {
+    "cod": "200",
+    "message": 0,
+    "cnt": 40,
+    "list": [
         {
-            "id": 803,
-            "main": "Clouds",
-            "description": "broken clouds",
-            "icon": "04d"
+            "dt": 1690750800,
+            "main": {
+                "temp": 30.01,
+                "feels_like": 28.69,
+                "temp_min": 30.01,
+                "temp_max": 31.71,
+                "pressure": 1009,
+                "sea_level": 1009,
+                "grnd_level": 896,
+                "humidity": 29.0,
+                "temp_kf": -1.7
+            },
+            "weather": [
+                {
+                    "id": 801,
+                    "main": "Clouds",
+                    "description": "few clouds",
+                    "icon": "02d"
+                }
+            ],
+            "clouds": {
+                "all": 20
+            },
+            "wind": {
+                "speed": 5.3,
+                "deg": 242,
+                "gust": 8.98
+            },
+            "visibility": 10000,
+            "pop": 0,
+            "sys": {
+                "pod": "d"
+            },
+            "dt_txt": "2023-07-30 21:00:00"
         }
-    ],
-    "base": "stations",
-    "main": {
-        "temp": 24.18,
-        "feels_like": 23.8,
-        "temp_min": 24.18,
-        "temp_max": 24.18,
-        "pressure": 1003,
-        "humidity": 44.0,
-        "sea_level": 1003,
-        "grnd_level": 914
-    },
-    "visibility": 10000,
-    "wind": {
-        "speed": 2.6,
-        "deg": 289,
-        "gust": 4.41
-    },
-    "clouds": {
-        "all": 54
-    },
-    "dt": 1690596005,
-    "sys": {
-        "country": "CN",
-        "sunrise": 1690575253,
-        "sunset": 1690630414
-    },
-    "timezone": 28800,
-    "id": 2035583,
-    "name": "Nirji",
-    "cod": 200
-}""", 200));
+]}""", 200));
 
-      expect(await OpenWeatherMapService.getCurrentWeatherData(city, client),
-          isA<WeatherModel>());
+      expect(
+          await OpenWeatherMapService.getNextKDaysWeatherData(city, client, 1),
+          isA<List<WeatherModel>>());
     });
 
     test('throws error on bad request', () async {
       when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/weather?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric')))
+              'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
           .thenAnswer((_) async => http.Response(
               '{"cod": "400","message": "Nothing to geocode"}', 400));
 
-      expect(OpenWeatherMapService.getCurrentWeatherData(city, client),
+      expect(OpenWeatherMapService.getNextKDaysWeatherData(city, client, 1),
           throwsException);
     });
   });

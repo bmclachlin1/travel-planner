@@ -9,14 +9,9 @@ import '../services/open_weather_map_service.dart';
 import 'weather_details_widget.dart';
 
 /// Displays the weather for the city you are visiting
-class WeatherWidget extends StatefulWidget {
+class WeatherWidget extends StatelessWidget {
   const WeatherWidget({super.key});
 
-  @override
-  State<WeatherWidget> createState() => _WeatherWidgetState();
-}
-
-class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
