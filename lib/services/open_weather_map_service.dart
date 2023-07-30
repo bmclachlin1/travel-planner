@@ -11,6 +11,9 @@ import '../secrets.dart';
 
 /// Provides an interface to perform network calls on the OpenWeatherMap API
 class OpenWeatherMapService {
+  /// Uses the 5 day weather forecast API
+  ///
+  /// See [https://openweathermap.org/forecast5]
   static getNextKDaysWeatherData(
       CityModel city, http.Client client, int? days) async {
     days ??= 1;

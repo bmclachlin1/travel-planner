@@ -25,7 +25,7 @@ class WeatherDetailsWidget extends StatelessWidget {
         return ListTile(
           title: Text("Day ${index + 1}"),
           subtitle: Text(
-              "Will have a temperature of ${weather.temp} °C with ${weather.desc}. You can expect wind of ${weather.wind} km/h, and a humidity of ${weather.humidity}%.",
+              "Will have a temperature of ${weather.temp} °C with ${weather.desc}. You can expect wind of ${weather.wind} meters/sec, and a humidity of ${weather.humidity}%.",
               style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
         );
       },
