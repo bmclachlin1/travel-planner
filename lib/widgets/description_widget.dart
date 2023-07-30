@@ -25,7 +25,7 @@ class DescriptionWidget extends StatelessWidget {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Text(Texts.descriptionHeader,
                     style: theme.textTheme.headlineSmall),
                 const Icon(Icons.description,

@@ -28,7 +28,7 @@ class WeatherWidget extends StatelessWidget {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
                 const Icon(Icons.cloud, color: Colors.blue, size: Sizes.xl)
               ],

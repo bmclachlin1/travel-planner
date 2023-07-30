@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/city_model.dart';
 import '../models/weather_model.dart';
 
-/// Encapsulates building the text for selected city
+/// Uses details from [WeatherWidget] to render a specific description of the weather
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget(
       {super.key, required this.weather, required this.city});
