@@ -4,6 +4,9 @@ import 'package:silvacom_flutter/providers/number_of_weather_days_provider.dart'
 
 import '../constants.dart';
 
+/// Renders a dropdown of how many days to forecast weather for
+///
+/// Persists the state to [NumberOfWeatherDaysProvider]
 class NumberOfWeatherDaysDropdownWidget extends StatelessWidget {
   const NumberOfWeatherDaysDropdownWidget({super.key});
 

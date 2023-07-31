@@ -6,7 +6,9 @@ import '../constants.dart';
 import '../models/city_model.dart';
 import '../providers/selected_city_provider.dart';
 
-/// Loads cities from firebase, and renders a dropdown for user to select city they would like to travel to
+/// Loads cities from firebase, and renders a dropdown for user to select a city
+///
+/// Persists the state to [SelectedCityProvider]
 class DestinationDropdownWidget extends StatelessWidget {
   DestinationDropdownWidget({super.key});
 

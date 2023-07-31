@@ -18,7 +18,8 @@ void main() async {
   /// Multiprovider allows us to pass multiple observables to our application
   ///
   /// Here we are providing the city and number of days for weather forecast to the root
-  /// of our application
+  /// of our application. Child widgets can then subscribe to this state, and rebuild
+  /// when the state changes.
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (context) => SelectedCityProvider(),
