@@ -6,7 +6,7 @@ import 'description_widget.dart';
 import 'destination_dropdown_widget.dart';
 import 'weather_widget.dart';
 
-/// Displays a dropdown, description, and weather for a city
+/// Renders the main content/widgets of the application
 class TravelPlannerCardWidget extends StatelessWidget {
   const TravelPlannerCardWidget({
     super.key,

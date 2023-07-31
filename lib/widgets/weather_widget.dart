@@ -31,13 +31,7 @@ class WeatherWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
-                const Icon(Icons.cloud, color: Colors.blue, size: Sizes.xl)
-              ],
-            ),
+            Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
             const SizedBox(height: Sizes.medium),
             cityProvider.selectedCity == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)

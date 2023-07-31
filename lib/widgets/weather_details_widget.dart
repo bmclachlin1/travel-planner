@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../helpers/weather_icon_helper.dart';
 import '../models/city_model.dart';
 import '../models/weather_model.dart';
 
@@ -27,6 +28,7 @@ class WeatherDetailsWidget extends StatelessWidget {
             DateTime.fromMillisecondsSinceEpoch(weather.dt * 1000, isUtc: true);
         return ListTile(
           title: Text(DateFormat('EEEE, MMMM d').format(date)),
+          trailing: WeatherIconHelper.getWeatherIcon(weather.weather_id),
           subtitle: Text(
               "Will have a temperature of ${weather.temp} °C with ${weather.desc}. You can expect wind of ${weather.wind} meters/sec, and a humidity of ${weather.humidity}%.",
               style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
