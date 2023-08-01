@@ -6,7 +6,10 @@ import 'description_widget.dart';
 import 'destination_dropdown_widget.dart';
 import 'weather_widget.dart';
 
-/// Renders the main content/widgets of the application
+/// Renders a card containing the main content of the application
+///
+/// Content includes a [DestinationDropdownWidget], [NumberOfWeatherDaysDropdownWidget],
+/// [DescriptionWidget], and a [WeatherWidget]
 class TravelPlannerCardWidget extends StatelessWidget {
   const TravelPlannerCardWidget({
     super.key,

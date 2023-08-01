@@ -2,8 +2,8 @@ import 'package:silvacom_flutter/models/city_model.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('City', () {
-    test('Deserialize', () {
+  group('CityModel', () {
+    test('Deserialize JSON', () {
       const json = <String, dynamic>{
         "id": "ABC123",
         "name": "Calgary",

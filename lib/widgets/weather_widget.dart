@@ -11,6 +11,9 @@ import 'weather_details_widget.dart';
 /// Displays the weather for the city you are visiting
 ///
 /// Uses [OpenWeatherMapService] to get weather data from an API
+///
+/// Subscribes to [SelectedCityProvider] and [NumberOfWeatherDaysProvider]
+/// and rebuilds when one of them changes
 class WeatherWidget extends StatelessWidget {
   const WeatherWidget({super.key});
 

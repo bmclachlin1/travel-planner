@@ -10,24 +10,25 @@ import 'open_weather_map_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() async {
-  group('getNextKDaysWeatherData', () {
-    late CityModel city;
-    late MockClient client;
+  group('OpenWeatherMapService', () {
+    group('getNextKDaysWeatherData', () {
+      late CityModel city;
+      late MockClient client;
 
-    setUp(() {
-      city = const CityModel(
-          documentId: "abc",
-          name: "Calgary",
-          label: "YYC",
-          description: "My hometown",
-          latlong: ["51", "-114.07"]);
-      client = MockClient();
-    });
-    test('returns weather data when http call completes successfully',
-        () async {
-      when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
-          .thenAnswer((_) async => http.Response("""
+      setUp(() {
+        city = const CityModel(
+            documentId: "abc",
+            name: "Calgary",
+            label: "YYC",
+            description: "My hometown",
+            latlong: ["51", "-114.07"]);
+        client = MockClient();
+      });
+      test('returns weather data when http call completes successfully',
+          () async {
+        when(client.get(Uri.parse(
+                'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
+            .thenAnswer((_) async => http.Response("""
   {
     "cod": "200",
     "message": 0,
@@ -71,19 +72,21 @@ void main() async {
         }
 ]}""", 200));
 
-      expect(
-          await OpenWeatherMapService.getNextKDaysWeatherData(city, client, 1),
-          isA<List<WeatherModel>>());
-    });
+        expect(
+            await OpenWeatherMapService.getNextKDaysWeatherData(
+                city, client, 1),
+            isA<List<WeatherModel>>());
+      });
 
-    test('throws error on bad request', () async {
-      when(client.get(Uri.parse(
-              'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
-          .thenAnswer((_) async => http.Response(
-              '{"cod": "400","message": "Nothing to geocode"}', 400));
+      test('throws error on bad request', () async {
+        when(client.get(Uri.parse(
+                'https://api.openweathermap.org/data/2.5/forecast?lat=51&lon=-114.07&appid=${Secrets.openWeatherMapApiKey}&units=metric&cnt=8.0')))
+            .thenAnswer((_) async => http.Response(
+                '{"cod": "400","message": "Nothing to geocode"}', 400));
 
-      expect(OpenWeatherMapService.getNextKDaysWeatherData(city, client, 1),
-          throwsException);
+        expect(OpenWeatherMapService.getNextKDaysWeatherData(city, client, 1),
+            throwsException);
+      });
     });
   });
 }

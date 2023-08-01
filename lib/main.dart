@@ -11,6 +11,8 @@ import 'providers/selected_city_provider.dart';
 import 'widgets/travel_planner_card_widget.dart';
 
 /// The starting point of our application
+///
+/// Calls run app to mount [TravelPlanner] as the root of our widget tree
 void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -32,7 +34,10 @@ void main() async {
   ], child: const TravelPlanner()));
 }
 
-/// Stateless Widget containing the entire SPA (single page application)
+/// The root widget of our application
+///
+/// Renders a [MaterialApp] and [Scaffold] containing a
+/// [TravelPlannerCardWidget] for the main application content
 class TravelPlanner extends StatelessWidget {
   const TravelPlanner({super.key});
 

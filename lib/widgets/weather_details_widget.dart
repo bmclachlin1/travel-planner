@@ -7,7 +7,10 @@ import '../models/city_model.dart';
 import '../models/weather_model.dart';
 import '../providers/scroll_controller_provider.dart';
 
-/// Uses details from [WeatherWidget] to render a specific description of the weather
+/// Renders the weather forecast in a listview
+///
+/// Accepts a list of [WeatherModel] and a [CityModel] as
+/// parameters.
 class WeatherDetailsWidget extends StatelessWidget {
   const WeatherDetailsWidget(
       {super.key, required this.weathers, required this.city});

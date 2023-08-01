@@ -5,6 +5,9 @@ import '../constants.dart';
 import '../providers/selected_city_provider.dart';
 
 /// Describes the city you are visiting
+///
+/// Reads from [SelectedCityProvider] to get the [CityModel]
+/// to present a description from
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({super.key});
 
