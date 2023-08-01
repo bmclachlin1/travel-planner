@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'firebase_options.dart';
 import 'providers/number_of_weather_days_provider.dart';
+import 'providers/scroll_controller_provider.dart';
 import 'providers/selected_city_provider.dart';
 import 'widgets/travel_planner_card_widget.dart';
 
@@ -26,7 +27,8 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => NumberOfWeatherDaysProvider(),
-    )
+    ),
+    ChangeNotifierProvider(create: (context) => ScrollControllerProvider())
   ], child: const TravelPlanner()));
 }
 
@@ -56,9 +58,11 @@ class TravelPlanner extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: NetworkImage(NetworkImages.backgroundImageUri))),
-              child: const Center(
+              child: Center(
                 child: Scrollbar(
-                  child: SingleChildScrollView(
+                  controller:
+                      context.read<ScrollControllerProvider>().controller,
+                  child: const SingleChildScrollView(
                     child: TravelPlannerCardWidget(),
                   ),
                 ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/weather_icon_helper.dart';
 import '../models/city_model.dart';
 import '../models/weather_model.dart';
+import '../providers/scroll_controller_provider.dart';
 
 /// Uses details from [WeatherWidget] to render a specific description of the weather
 class WeatherDetailsWidget extends StatelessWidget {
@@ -20,6 +22,7 @@ class WeatherDetailsWidget extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      controller: context.read<ScrollControllerProvider>().controller,
       separatorBuilder: (context, index) {
         return const Divider(color: Colors.black);
       },
