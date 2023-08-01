@@ -1,6 +1,8 @@
-# silvacom_flutter
+# Travel Planner
 
-A new Flutter project.
+A travel planner application built for the Silvacom Craft Project.
+
+Source code can be found in the /lib folder.
 
 ## Getting Started
 
