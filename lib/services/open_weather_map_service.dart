@@ -26,7 +26,7 @@ class OpenWeatherMapService {
       final data = jsonDecode(response.body);
       for (var day = 0; day < days; day++) {
         weatherModels.add(WeatherModel.fromJson(data['list']
-            [day * TimeOfDay.hoursPerDay / Forecast.forecastApiRate]));
+            [day * TimeOfDay.hoursPerDay ~/ Forecast.forecastApiRate]));
       }
       return weatherModels;
     } else {

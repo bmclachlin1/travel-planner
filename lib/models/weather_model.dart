@@ -5,7 +5,7 @@ class WeatherModel {
   final double wind;
   final String desc;
   final int dt;
-  final int weather_id;
+  final int weatherId;
 
   const WeatherModel(
       {required this.temp,
@@ -13,7 +13,7 @@ class WeatherModel {
       required this.humidity,
       required this.wind,
       required this.dt,
-      required this.weather_id});
+      required this.weatherId});
 
   /// Factory method used to convert the HTTP response body from the openweathermap API to our weather domain model
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +23,6 @@ class WeatherModel {
         wind: json['wind']['speed'],
         desc: json['weather'][0]['description'].toString(),
         dt: json['dt'],
-        weather_id: json['weather'][0]['id']);
+        weatherId: json['weather'][0]['id']);
   }
 }
