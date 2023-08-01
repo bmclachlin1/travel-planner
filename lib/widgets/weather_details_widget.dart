@@ -19,6 +19,7 @@ class WeatherDetailsWidget extends StatelessWidget {
 
     return ListView.separated(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       separatorBuilder: (context, index) {
         return const Divider(color: Colors.black);
       },
