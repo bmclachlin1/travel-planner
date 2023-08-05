@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Gets an appropriate weather icon based on the weather id returned from [OpenWeatherMapService]
 class WeatherIconHelper {
   static Icon getWeatherIcon(int id) {
     switch (id) {

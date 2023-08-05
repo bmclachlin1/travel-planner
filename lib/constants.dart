@@ -32,7 +32,8 @@ class Texts {
   static const descriptionHintText =
       'Please select a city to get a description';
   static const weatherHeader = 'Weather Forecast';
-  static const weatherHintText = 'Please select a city to get the weather';
+  static const weatherHintText =
+      'Please select a city and weather day to get the weather';
 }
 
 class Forecast {

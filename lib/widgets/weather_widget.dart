@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:silvacom_flutter/providers/number_of_weather_days_provider.dart';
+import 'package:silvacom_flutter/providers/selected_weather_day_provider.dart';
 
 import '../constants.dart';
 import '../providers/selected_city_provider.dart';
@@ -21,8 +20,7 @@ class WeatherWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cityProvider = context.watch<SelectedCityProvider>();
-    final numberOfWeatherDaysProvider =
-        context.watch<NumberOfWeatherDaysProvider>();
+    final weatherDayProvider = context.watch<SelectedWeatherDayProvider>();
 
     return Container(
         width: Sizes.containerWidth,
@@ -36,25 +34,12 @@ class WeatherWidget extends StatelessWidget {
           children: <Widget>[
             Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
             const SizedBox(height: Sizes.medium),
-            cityProvider.selectedCity == null
+            cityProvider.selectedCity == null ||
+                    weatherDayProvider.selectedWeather == null
                 ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
-                : FutureBuilder<dynamic>(
-                    future: OpenWeatherMapService.getNextKDaysWeatherData(
-                        cityProvider.selectedCity!,
-                        http.Client(),
-                        numberOfWeatherDaysProvider.numberOfDays),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        if (snapshot.hasData) {
-                          return WeatherDetailsWidget(
-                              weathers: snapshot.data!,
-                              city: cityProvider.selectedCity!);
-                        } else if (snapshot.hasError) {
-                          return const Text(Texts.genericError);
-                        }
-                      }
-                      return const Center(child: CircularProgressIndicator());
-                    })
+                : WeatherDetailsWidget(
+                    city: cityProvider.selectedCity!,
+                    weather: weatherDayProvider.selectedWeather!)
           ],
         ));
   }

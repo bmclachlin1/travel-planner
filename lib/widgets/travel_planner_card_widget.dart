@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:silvacom_flutter/widgets/number_of_weather_days_dropdown_widget.dart';
+import 'package:silvacom_flutter/widgets/weather_days_widget.dart';
 
 import '../constants.dart';
 import 'description_widget.dart';
@@ -34,7 +34,7 @@ class TravelPlannerCardWidget extends StatelessWidget {
               const SizedBox(height: Sizes.medium),
               DestinationDropdownWidget(),
               const SizedBox(height: Sizes.medium),
-              const NumberOfWeatherDaysDropdownWidget(),
+              const WeatherDaysWidget(),
               const SizedBox(height: Sizes.medium),
               const DescriptionWidget(),
               const SizedBox(height: Sizes.medium),
