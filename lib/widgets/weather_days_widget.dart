@@ -18,48 +18,50 @@ class WeatherDaysWidget extends StatelessWidget {
     final cityProvider = context.watch<SelectedCityProvider>();
 
     return cityProvider.selectedCity == null
-        ? Container()
-        : FutureBuilder<dynamic>(
-            future: OpenWeatherMapService.getNextKDaysWeatherData(
-                cityProvider.selectedCity!, http.Client(), 5),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  final weatherModels = snapshot.data!;
-                  return SizedBox(
-                    child: Scrollbar(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: weatherModels
-                                .map<Widget>((WeatherModel weather) {
-                              final date = DateTime.fromMillisecondsSinceEpoch(
-                                  weather.dt * 1000,
-                                  isUtc: true);
-                              return ElevatedButton(
-                                onPressed: () {
-                                  context
-                                      .read<SelectedWeatherDayProvider>()
-                                      .updateSelectedCity(weather);
-                                },
-                                child: Column(
-                                  children: [
-                                    WeatherIconHelper.getWeatherIcon(
-                                        weather.weatherId),
-                                    Text(DateFormat('MMM d').format(date))
-                                  ],
-                                ),
-                              );
-                            }).toList()),
-                      ),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return const Text(Texts.genericError);
-                }
-              }
-              return const Center(child: CircularProgressIndicator());
-            });
+        ? const SizedBox.shrink()
+        : SizedBox(
+            width: Sizes.containerWidth,
+            child: FutureBuilder<dynamic>(
+                future: OpenWeatherMapService.getNextKDaysWeatherData(
+                    cityProvider.selectedCity!, http.Client(), 5),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      final weatherModels = snapshot.data!;
+                      return Scrollbar(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: weatherModels
+                                  .map<Widget>((WeatherModel weather) {
+                                final date =
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                        weather.dt * 1000,
+                                        isUtc: true);
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    context
+                                        .read<SelectedWeatherDayProvider>()
+                                        .updateSelectedWeather(weather);
+                                  },
+                                  child: Column(
+                                    children: [
+                                      WeatherIconHelper.getWeatherIcon(
+                                          weather.weatherId),
+                                      Text(DateFormat('MMM d').format(date))
+                                    ],
+                                  ),
+                                );
+                              }).toList()),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Text(Texts.genericError);
+                    }
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                }),
+          );
   }
 }

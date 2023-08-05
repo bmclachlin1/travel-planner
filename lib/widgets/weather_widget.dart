@@ -22,25 +22,25 @@ class WeatherWidget extends StatelessWidget {
     final cityProvider = context.watch<SelectedCityProvider>();
     final weatherDayProvider = context.watch<SelectedWeatherDayProvider>();
 
-    return Container(
-        width: Sizes.containerWidth,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Sizes.medium),
-          border: Border.all(color: Colors.black, width: Sizes.borderWidth),
-        ),
-        padding: const EdgeInsets.all(Sizes.medium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
-            const SizedBox(height: Sizes.medium),
-            cityProvider.selectedCity == null ||
-                    weatherDayProvider.selectedWeather == null
-                ? Text(Texts.weatherHintText, style: theme.textTheme.bodyLarge)
-                : WeatherDetailsWidget(
+    return cityProvider.selectedCity == null ||
+            weatherDayProvider.selectedWeather == null
+        ? const SizedBox.shrink()
+        : Container(
+            width: Sizes.containerWidth,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Sizes.medium),
+              border: Border.all(color: Colors.black, width: Sizes.borderWidth),
+            ),
+            padding: const EdgeInsets.all(Sizes.medium),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(Texts.weatherHeader, style: theme.textTheme.headlineSmall),
+                const SizedBox(height: Sizes.medium),
+                WeatherDetailsWidget(
                     city: cityProvider.selectedCity!,
                     weather: weatherDayProvider.selectedWeather!)
-          ],
-        ));
+              ],
+            ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:silvacom_flutter/providers/selected_weather_day_provider.dart';
 
 import '../constants.dart';
 import '../models/city_model.dart';
@@ -48,6 +49,9 @@ class DestinationDropdownWidget extends StatelessWidget {
                     }).toList(),
                     onChanged: (city) {
                       cityProvider.updateSelectedCity(city);
+                      context
+                          .read<SelectedWeatherDayProvider>()
+                          .updateSelectedWeather(null);
                     }),
               ),
             ),

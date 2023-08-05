@@ -16,31 +16,31 @@ class DescriptionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final cityProvider = context.watch<SelectedCityProvider>();
 
-    return Container(
-        width: Sizes.containerWidth,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Sizes.medium),
-          border: Border.all(color: Colors.black, width: Sizes.borderWidth),
-        ),
-        padding: const EdgeInsets.all(Sizes.medium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(Texts.descriptionHeader,
-                    style: theme.textTheme.headlineSmall),
-                const Icon(Icons.description,
-                    size: Sizes.xl, color: Colors.indigo)
-              ],
+    return cityProvider.selectedCity == null
+        ? const SizedBox.shrink()
+        : Container(
+            width: Sizes.containerWidth,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Sizes.medium),
+              border: Border.all(color: Colors.black, width: Sizes.borderWidth),
             ),
-            const SizedBox(height: Sizes.medium),
-            Text(
-                cityProvider.selectedCity?.description ??
-                    Texts.descriptionHintText,
-                style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
-          ],
-        ));
+            padding: const EdgeInsets.all(Sizes.medium),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(Texts.descriptionHeader,
+                        style: theme.textTheme.headlineSmall),
+                    const Icon(Icons.description,
+                        size: Sizes.xl, color: Colors.indigo)
+                  ],
+                ),
+                const SizedBox(height: Sizes.medium),
+                Text(cityProvider.selectedCity!.description,
+                    style: theme.textTheme.bodyLarge?.copyWith(height: 1.5)),
+              ],
+            ));
   }
 }
